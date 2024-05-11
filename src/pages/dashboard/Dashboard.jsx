@@ -1,5 +1,5 @@
-import NavBar from "../components/navBar/NavBar";
-import SideBar from "../components/verticalBar/VerticalBar";
+import NavBar from "../../components/navBar/NavBar";
+import SideBar from "../../components/verticalBar/VerticalBar";
 import "./dashboard.css"
 
 function Dashboard() {
