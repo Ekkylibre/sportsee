@@ -1,6 +1,7 @@
 import NavBar from "../../components/navBar/NavBar";
 import SideBar from "../../components/verticalBar/VerticalBar";
 import "./home.css";
+import { Link } from "react-router-dom";
 
 function Home() {
     return (
@@ -14,8 +15,8 @@ function Home() {
                         <p>Choisissez un utilisateur ci-dessous pour accéder au tableau de bord 😄</p>
                     </div>
                     <div className="user-btn">
-                        <button>User 12</button>
-                        <button>User 18</button>
+                        <Link to="/dashboard/12"><button>User 12</button></Link>
+                        <Link to="/dashboard/18"><button>User 18</button></Link>
                     </div>
                 </div>
             </main>
@@ -23,4 +24,4 @@ function Home() {
     )
 }
 
-export default Home
+export default Home;
