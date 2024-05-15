@@ -28,6 +28,47 @@ function Dashboard() {
               </>
             )}
           </div>
+
+          <div className="array">
+
+            <div className="charts">
+
+              <div className="poids">Poids</div>
+
+              <div className="small-charts">
+                <div className="goals">Objectifs</div>
+                <div className="radar">Radar</div>
+                <div className="kpi">KPI</div>
+              </div>
+
+            </div>
+
+            <div className="nutrients">
+
+              <div className="value">
+                <div className="number">1,930kCal</div>
+                <div className="title">Calories</div>
+              </div>
+
+              <div className="value">
+                <div className="number">1,930kCal</div>
+                <div className="title">Calories</div>
+              </div>
+
+              <div className="value">
+                <div className="number">1,930kCal</div>
+                <div className="title">Calories</div>
+              </div>
+
+              <div className="value">
+                <div className="number">1,930kCal</div>
+                <div className="title">Calories</div>
+              </div>
+              
+            </div>
+
+          </div>
+
         </div>
       </main>
     </div>
