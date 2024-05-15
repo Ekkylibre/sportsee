@@ -1,7 +1,7 @@
 import NavBar from "../../components/navBar/NavBar";
 import SideBar from "../../components/verticalBar/VerticalBar";
 import "./dashboard.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { USER_MAIN_DATA } from "../../assets/data/data";
 import ValueItem from "../../components/valueItem/ValueItem";
@@ -29,12 +29,18 @@ function Dashboard() {
   </svg>;
 
   const { userId } = useParams();
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     const foundUser = USER_MAIN_DATA.find((user) => user.id === parseInt(userId));
     setUser(foundUser);
-  }, [userId]);
+
+    if (!foundUser) {
+      navigate('/error');
+    }
+  }, [userId, navigate]);
+
 
   return (
     <div>
