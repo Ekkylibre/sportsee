@@ -1,17 +1,16 @@
 .array {
     display: flex;
     gap: 31px;
-    max-width: 1024px;
-    
+
     .charts {
         display: flex;
         flex-direction: column;
-        gap: 30px;
+        justify-content: space-between;
         width: 100%;
 
         .poids {
             border: 1px solid red;
-            height: 280px;
+            height: 320px;
         }
 
         .small-charts {
@@ -44,19 +43,5 @@
         flex-direction: column;
         justify-content: space-between;
         gap: 39px;
-
-        .value {
-            background-color: gray;
-            border: 1px solid pink;
-            padding: 32px;
-
-            .number {
-                border: 1px solid yellowgreen;
-            }
-
-            .title {
-                border: 1px solid yellowgreen;
-            }
-        }
     }
 }

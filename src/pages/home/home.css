@@ -6,7 +6,9 @@
 
 main .main-container {
   margin-left: 200px;
+  margin-right: 100px;
   margin-top: 50px;
+  margin-bottom: 50px;
   display: flex;
   flex-direction: column;
   gap: 41px;

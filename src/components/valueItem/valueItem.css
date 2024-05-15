@@ -1,0 +1,38 @@
+.value {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fbfbfb;
+  padding: 32px;
+  border-radius: 5px;
+  gap: 24px;
+}
+.value .fireIcon {
+  background-color: #fccbcb;
+  padding: 21px;
+  border-radius: 5px;
+}
+.value .chickenIcon {
+  background-color: #d8eefc;
+  padding: 21px;
+  border-radius: 5px;
+}
+.value .appleIcon {
+  background-color: #fcf2cb;
+  padding: 21px;
+  border-radius: 5px;
+}
+.value .burgerIcon {
+  background-color: #fce1e8;
+  padding: 21px;
+  border-radius: 5px;
+}
+.value div .number {
+  font-size: 20px;
+  font-weight: 700;
+}
+.value div .title {
+  color: #74798C;
+  font-size: 14px;
+  font-weight: 500;
+}/*# sourceMappingURL=valueItem.css.map */
