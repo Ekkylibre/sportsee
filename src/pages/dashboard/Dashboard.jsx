@@ -5,6 +5,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { USER_MAIN_DATA } from "../../assets/data/data";
 import ValueItem from "../../components/valueItem/ValueItem";
+import Kpi from "../../components/kpi/Kpi";
 
 function Dashboard() {
 
@@ -63,7 +64,7 @@ function Dashboard() {
               <div className="small-charts">
                 <div className="goals">Objectifs</div>
                 <div className="radar">Radar</div>
-                <div className="kpi">KPI</div>
+                <div className="kpi"><Kpi userId={userId} /></div>
               </div>
             </div>
 
