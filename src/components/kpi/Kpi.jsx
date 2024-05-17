@@ -16,7 +16,7 @@ function Kpi({ userId }) {
 
     return (
         <div className="kpi-container">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="auto">
                 <div className='score-title'>Score</div>
                 <PieChart>
                     <Pie
