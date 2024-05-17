@@ -7,4 +7,17 @@
   position: absolute;
   top: 24px;
   left: 32px;
+}
+.weight-container .custom-tooltip {
+  background-color: red;
+  color: white;
+  padding: 10px;
+}
+.weight-container .custom-tooltip .kg {
+  padding: 10px 0 20px 0;
+  text-align: center;
+}
+.weight-container .custom-tooltip .kcal {
+  padding: 10px 0 20px 0;
+  text-align: center;
 }/*# sourceMappingURL=weight.css.map */

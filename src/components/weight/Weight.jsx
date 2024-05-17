@@ -9,6 +9,19 @@ function Weight({ userId }) {
         return <div>User not found</div>;
     }
 
+    const CustomTooltip = ({ active, payload, label }) => {
+        if (active && payload && payload.length) {
+            return (
+                <div className="custom-tooltip">
+                    <p className='kg'>{`${payload[0].value} kg`}</p>
+                    <p className='kcal'>{`${payload[1].value} kcal`}</p>
+                </div>
+            );
+        }
+
+        return null;
+    };
+
     const formatXAxis = (tickItem) => {
         // Extraction du jour à partir de la date
         const date = new Date(tickItem);
@@ -48,7 +61,7 @@ function Weight({ userId }) {
                         tickMargin={40}
                         interval={1}
                         domain={['auto', 'auto']}/>
-                    <Tooltip />
+                    <Tooltip content={<CustomTooltip />} />
                     <Legend
                          wrapperStyle={{
                             position: 'absolute',
@@ -69,12 +82,14 @@ function Weight({ userId }) {
                         dataKey="kilogram"
                         fill="black"
                         name="Poids (kg)"
-                        radius={[10, 10, 0, 0]} />
+                        radius={[10, 10, 0, 0]}
+                        label={({ value }) => `${value} kg`} />
                     <Bar
                         dataKey="calories"
                         fill="red"
                         name="Calories brûlées (kCal)"
-                        radius={[10, 10, 0, 0]} />
+                        radius={[10, 10, 0, 0]}
+                        label={({ value }) => `${value} kcal`} />
                     <ReferenceLine
                         y={200}
                         stroke="grey"
