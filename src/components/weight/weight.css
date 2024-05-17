@@ -1,0 +1,10 @@
+.weight-container {
+  position: relative;
+}
+.weight-container .weight-title {
+  font-size: 15px;
+  font-weight: 500;
+  position: absolute;
+  top: 24px;
+  left: 32px;
+}/*# sourceMappingURL=weight.css.map */

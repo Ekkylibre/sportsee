@@ -7,6 +7,7 @@ import { USER_MAIN_DATA } from "../../assets/data/data";
 import ValueItem from "../../components/valueItem/ValueItem";
 import Kpi from "../../components/kpi/Kpi";
 import Radar from "../../components/radar/Radar";
+import Weight from "../../components/weight/Weight";
 
 function Dashboard() {
 
@@ -61,7 +62,7 @@ function Dashboard() {
 
           <div className="array">
             <div className="charts">
-              <div className="poids">Poids</div>
+              <div className="poids"><Weight userId={userId}/></div>
               <div className="small-charts">
                 <div className="goals">Objectifs</div>
                 <div className="radar"><Radar userId={userId}/></div>
