@@ -1,11 +1,16 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 import { USER_MAIN_DATA } from '../../assets/data/data';
-import './kpi.css'; // Assurez-vous de créer ce fichier CSS
+import './kpi.css';
 
 function Kpi({ userId }) {
     const foundUser = USER_MAIN_DATA.find((user) => user.id === parseInt(userId));
 
-    const todayScore = foundUser.todayScore * 100 || foundUser.score * 100;
+    if (!foundUser) {
+        console.error(`User with id ${userId} not found`);
+        return null;
+    }
+
+    const todayScore = (foundUser.todayScore ?? foundUser.score) * 100;
 
     const data = [
         { name: 'Score du jour', value: todayScore },
@@ -16,8 +21,8 @@ function Kpi({ userId }) {
 
     return (
         <div className="kpi-container">
-            <ResponsiveContainer width="100%" height="auto">
-                <div className='score-title'>Score</div>
+            <div className='score-title'>Score</div>
+            <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                     <Pie
                         data={data}
@@ -36,11 +41,11 @@ function Kpi({ userId }) {
                         ))}
                     </Pie>
                 </PieChart>
-                <div className="centered-text">
-                    <div>{`${todayScore}%`}</div>
-                    <div className='text-container'>de votre objectif</div>
-                </div>
             </ResponsiveContainer>
+            <div className="centered-text">
+                <div>{`${todayScore}%`}</div>
+                <div className='text-container'>de votre objectif</div>
+            </div>
         </div>
     );
 }
