@@ -8,6 +8,7 @@ import ValueItem from "../../components/valueItem/ValueItem";
 import Kpi from "../../components/kpi/Kpi";
 import Radar from "../../components/radar/Radar";
 import Weight from "../../components/weight/Weight";
+import Goals from "../../components/goals/Goals";
 
 function Dashboard() {
 
@@ -64,7 +65,7 @@ function Dashboard() {
             <div className="charts">
               <div className="poids"><Weight userId={userId}/></div>
               <div className="small-charts">
-                <div className="goals">Objectifs</div>
+                <div className="goals"><Goals userId={userId}/></div>
                 <div className="radar"><Radar userId={userId}/></div>
                 <div className="kpi"><Kpi userId={userId} /></div>
               </div>
