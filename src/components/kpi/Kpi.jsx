@@ -6,8 +6,7 @@ function Kpi({ userId }) {
     const foundUser = USER_MAIN_DATA.find((user) => user.id === parseInt(userId));
 
     if (!foundUser) {
-        console.error(`User with id ${userId} not found`);
-        return null;
+        return <div>User not found</div>;
     }
 
     const todayScore = (foundUser.todayScore ?? foundUser.score) * 100;

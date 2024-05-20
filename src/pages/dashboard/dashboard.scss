@@ -1,43 +1,48 @@
 .array {
     display: flex;
     gap: 31px;
+    flex-wrap: wrap;
 
     .charts {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        width: 100%;
+        flex: 1;
+        min-width: 0;
+        gap: 30px;
+        order: 1; // Ajout de l'ordre pour .charts
 
         .poids {
             height: 320px;
             border-radius: 5px;
             background: #FBFBFB;
-
+            width: 100%;
+            order: 2; // Ajout de l'ordre pour .poids
         }
 
         .small-charts {
             display: flex;
             align-items: center;
             gap: 30px;
+            flex-wrap: wrap;
+            order: 3; // Ajout de l'ordre pour .small-charts
 
-            .goals {
-                width: 100%;
+            .goals,
+            .radar,
+            .kpi {
+                flex: 1;
                 height: 263px;
                 border-radius: 5px;
                 background-color: red;
+                min-width: 180px;
+                max-width: auto;
             }
 
             .radar {
-                width: 100%;
-                height: 263px;
-                border-radius: 5px;
                 background-color: #282d30;
             }
 
             .kpi {
-                width: 100%;
-                height: 263px;
-                border-radius: 5px;
                 background: #FBFBFB;
             }
         }
@@ -48,5 +53,9 @@
         flex-direction: column;
         justify-content: space-between;
         gap: 39px;
+        flex: 1;
+        min-width: 200px;
+        max-width: 258px;
+        order: 4; // Ajout de l'ordre pour .nutrients
     }
 }

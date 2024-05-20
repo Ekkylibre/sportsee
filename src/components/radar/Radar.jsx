@@ -11,11 +11,13 @@ function RadarComponent({ userId }) {
     if (value === 'speed') return 'Vitesse';
     if (value === 'intensity') return 'Intensité';
     return value;
-  };  
+  };
 
   const getUserPerformanceData = (userId) => {
     const userPerformance = USER_PERFORMANCE.find(user => user.userId === parseInt(userId));
-    if (!userPerformance) return [];
+    if (!userPerformance) {
+      return <div>User not found</div>;
+    }
 
     const { kind, data } = userPerformance;
     return data.map(item => ({
@@ -30,9 +32,9 @@ function RadarComponent({ userId }) {
   return (
     <ResponsiveContainer width="100%" height="100%">
       <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
-        <PolarGrid gridType="polygon" radialLines={false} polarRadius={[0, 20, 40, 60, 80, 100]}/>
-        <PolarAngleAxis 
-          dataKey="subject" 
+        <PolarGrid gridType="polygon" radialLines={false} polarRadius={[0, 20, 40, 60, 80, 100]} />
+        <PolarAngleAxis
+          dataKey="subject"
           tick={{ fill: 'white' }}
         />
         <Radar name="Performance" dataKey="value" fill="red" fillOpacity={0.6} />
