@@ -9,7 +9,7 @@ function Weight({ userId }) {
         return <div>User not found</div>;
     }
 
-    const CustomTooltip = ({ active, payload, label }) => {
+    const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
             return (
                 <div className="custom-tooltip">
