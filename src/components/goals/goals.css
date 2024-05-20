@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .goals {
   position: relative;
   max-width: 100%;
@@ -16,4 +17,8 @@
 .custom-tooltip {
   background-color: white;
   padding: 10px;
+}
+
+.recharts-cartesian-axis-tick {
+  padding-top: 20px; /* Ajoutez l'espace désiré en haut de l'axe des abscisses */
 }/*# sourceMappingURL=goals.css.map */
