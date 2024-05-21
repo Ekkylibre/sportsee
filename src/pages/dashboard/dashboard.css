@@ -51,4 +51,16 @@
   min-width: 200px;
   max-width: 258px;
   order: 4;
+}
+
+@media (max-width: 1024px) {
+  .small-charts .radar {
+    order: 3;
+  }
+  .small-charts .kpi {
+    order: 2;
+  }
+  .small-charts .goals {
+    order: 1;
+  }
 }/*# sourceMappingURL=dashboard.css.map */

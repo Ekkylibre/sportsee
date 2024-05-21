@@ -1,16 +1,18 @@
-import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts';
+import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip } from 'recharts';
 import { USER_PERFORMANCE } from '../../assets/data/data';
 
 function RadarComponent({ userId }) {
 
   const formatLabel = (value) => {
-    if (value === 'cardio') return 'Cardio';
-    if (value === 'energy') return 'Énergie';
-    if (value === 'endurance') return 'Endurance';
-    if (value === 'strength') return 'Force';
-    if (value === 'speed') return 'Vitesse';
-    if (value === 'intensity') return 'Intensité';
-    return value;
+    switch (value) {
+      case 'cardio': return 'Cardio';
+      case 'energy': return 'Énergie';
+      case 'endurance': return 'Endurance';
+      case 'strength': return 'Force';
+      case 'speed': return 'Vitesse';
+      case 'intensity': return 'Intensité';
+      default: return value;
+    }
   };
 
   const getUserPerformanceData = (userId) => {
@@ -38,6 +40,9 @@ function RadarComponent({ userId }) {
           tick={{ fill: 'white' }}
         />
         <Radar name="Performance" dataKey="value" fill="red" fillOpacity={0.6} />
+        <Tooltip
+          contentStyle={{ backgroundColor: "rgba(0, 0, 0, 0.8)", color: "white" }}
+        />
       </RadarChart>
     </ResponsiveContainer>
   );

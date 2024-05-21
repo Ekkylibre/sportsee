@@ -10,14 +10,14 @@
         flex: 1;
         min-width: 0;
         gap: 30px;
-        order: 1; // Ajout de l'ordre pour .charts
+        order: 1;
 
         .poids {
             height: 320px;
             border-radius: 5px;
             background: #FBFBFB;
             width: 100%;
-            order: 2; // Ajout de l'ordre pour .poids
+            order: 2;
         }
 
         .small-charts {
@@ -25,7 +25,7 @@
             align-items: center;
             gap: 30px;
             flex-wrap: wrap;
-            order: 3; // Ajout de l'ordre pour .small-charts
+            order: 3;
 
             .goals,
             .radar,
@@ -56,6 +56,22 @@
         flex: 1;
         min-width: 200px;
         max-width: 258px;
-        order: 4; // Ajout de l'ordre pour .nutrients
+        order: 4;
+    }
+}
+
+@media (max-width: 1024px) {
+    .small-charts {
+        .radar {
+            order: 3;
+        }
+
+        .kpi {
+            order: 2;
+        }
+
+        .goals {
+            order: 1;
+        }
     }
 }
