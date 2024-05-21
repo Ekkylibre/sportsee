@@ -1,0 +1,25 @@
+.goals {
+    position: relative;
+    max-width: 100%;
+    height: 100%;
+
+    .duration-title {
+        color: white;
+        font-size: 15px;
+        font-weight: 500;
+        opacity: 0.5;
+        position: absolute;
+        top: 29px;
+        left: 34px;
+    }
+    
+}
+
+.custom-tooltip {
+    background-color: white;
+    padding: 10px;
+}
+
+.recharts-cartesian-axis-tick {
+    padding-top: 20px; /* Ajoutez l'espace désiré en haut de l'axe des abscisses */
+}

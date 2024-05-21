@@ -1,0 +1,27 @@
+.weight-container {
+    position: relative;
+
+    .weight-title {
+        font-size: 15px;
+        font-weight: 500;
+        position: absolute;
+        top: 24px;
+        left: 32px;
+    }
+
+    .custom-tooltip {
+        background-color: red;
+        color: white;
+        padding: 10px;
+        
+        .kg {
+            padding: 10px 0 20px 0;
+            text-align: center;
+        }
+
+        .kcal {
+            padding: 10px 0 20px 0;
+            text-align: center;
+        }
+    }
+}

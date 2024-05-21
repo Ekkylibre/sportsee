@@ -1,0 +1,66 @@
+.array {
+  display: flex;
+  gap: 31px;
+  flex-wrap: wrap;
+}
+.array .charts {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+  min-width: 0;
+  gap: 30px;
+  order: 1;
+}
+.array .charts .poids {
+  height: 320px;
+  border-radius: 5px;
+  background: #FBFBFB;
+  width: 100%;
+  order: 2;
+}
+.array .charts .small-charts {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  order: 3;
+}
+.array .charts .small-charts .goals,
+.array .charts .small-charts .radar,
+.array .charts .small-charts .kpi {
+  flex: 1;
+  height: 263px;
+  border-radius: 5px;
+  background-color: red;
+  min-width: 180px;
+  max-width: auto;
+}
+.array .charts .small-charts .radar {
+  background-color: #282d30;
+}
+.array .charts .small-charts .kpi {
+  background: #FBFBFB;
+}
+.array .nutrients {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 39px;
+  flex: 1;
+  min-width: 200px;
+  max-width: 258px;
+  order: 4;
+}
+
+@media (max-width: 1024px) {
+  .small-charts .radar {
+    order: 3;
+  }
+  .small-charts .kpi {
+    order: 2;
+  }
+  .small-charts .goals {
+    order: 1;
+  }
+}/*# sourceMappingURL=dashboard.css.map */

@@ -1,0 +1,27 @@
+.kpi-container {
+  position: relative;
+  max-width: 100%;
+  height: 100%;
+}
+.kpi-container .score-title {
+  position: relative;
+  left: 30px;
+  top: 24px;
+  font-size: 15px;
+  font-weight: 500;
+}
+.kpi-container .centered-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-weight: bold;
+}
+.kpi-container .centered-text div {
+  font-size: 26px;
+}
+.kpi-container .centered-text .text-container {
+  color: #74798C;
+  font-size: 16px;
+}/*# sourceMappingURL=kpi.css.map */

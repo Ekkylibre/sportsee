@@ -1,0 +1,77 @@
+.array {
+    display: flex;
+    gap: 31px;
+    flex-wrap: wrap;
+
+    .charts {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 1;
+        min-width: 0;
+        gap: 30px;
+        order: 1;
+
+        .poids {
+            height: 320px;
+            border-radius: 5px;
+            background: #FBFBFB;
+            width: 100%;
+            order: 2;
+        }
+
+        .small-charts {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            order: 3;
+
+            .goals,
+            .radar,
+            .kpi {
+                flex: 1;
+                height: 263px;
+                border-radius: 5px;
+                background-color: red;
+                min-width: 180px;
+                max-width: auto;
+            }
+
+            .radar {
+                background-color: #282d30;
+            }
+
+            .kpi {
+                background: #FBFBFB;
+            }
+        }
+    }
+
+    .nutrients {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 39px;
+        flex: 1;
+        min-width: 200px;
+        max-width: 258px;
+        order: 4;
+    }
+}
+
+@media (max-width: 1024px) {
+    .small-charts {
+        .radar {
+            order: 3;
+        }
+
+        .kpi {
+            order: 2;
+        }
+
+        .goals {
+            order: 1;
+        }
+    }
+}
