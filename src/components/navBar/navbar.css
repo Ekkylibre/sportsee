@@ -14,7 +14,7 @@
   align-items: center;
   margin-right: 91px;
 }
-.nav-bar ul .nav-links a.active {
+.nav-bar ul .nav-links a {
   color: white;
 }
 .nav-bar ul .nav-img {
