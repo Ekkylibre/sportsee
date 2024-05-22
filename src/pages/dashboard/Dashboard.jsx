@@ -59,23 +59,21 @@ function Dashboard() {
 
           <div className="array">
             <div className="charts">
-              <div className="poids"><Weight userId={userId}/></div>
+              <div className="poids"><Weight userId={userId} /></div>
               <div className="small-charts">
-                <div className="goals"><Goals userId={userId}/></div>
-                <div className="radar"><Radar userId={userId}/></div>
+                <div className="goals"><Goals userId={userId} /></div>
+                <div className="radar"><Radar userId={userId} /></div>
                 <div className="kpi"><Kpi userId={userId} /></div>
               </div>
             </div>
 
             <div className="nutrients">
-              {user && (
-                <>
-                  <ValueItem nutrientIcon={fireIcon} number={`${user.keyData.calorieCount}kcal`} title="Calories" />
-                  <ValueItem nutrientIcon={chickenIcon} number={`${user.keyData.proteinCount}g`} title="Protéines" />
-                  <ValueItem nutrientIcon={appleIcon} number={`${user.keyData.carbohydrateCount}g`} title="Glucides" />
-                  <ValueItem nutrientIcon={burgerIcon} number={`${user.keyData.lipidCount}g`} title="Lipides" />
-                </>
-              )}
+              <>
+                <ValueItem nutrientIcon={fireIcon} number={user ? `${user.keyData.calorieCount}kcal` : 'N/A'} title="Calories" />
+                <ValueItem nutrientIcon={chickenIcon} number={user ? `${user.keyData.proteinCount}g` : 'N/A'} title="Protéines" />
+                <ValueItem nutrientIcon={appleIcon} number={user ? `${user.keyData.carbohydrateCount}g` : 'N/A'} title="Glucides" />
+                <ValueItem nutrientIcon={burgerIcon} number={user ? `${user.keyData.lipidCount}g` : 'N/A'} title="Lipides" />
+              </>
             </div>
           </div>
         </div>
