@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # Ignorer le fichier .eslintrc
-.eslintrc
+.eslintrc.cjs
