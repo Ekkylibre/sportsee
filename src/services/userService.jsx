@@ -12,10 +12,6 @@ const fetchUserData = (userId) => {
     const userAverageSessions = USER_AVERAGE_SESSIONS.find(session => session.userId === userIdInt);
     const userPerformance = USER_PERFORMANCE.find(performance => performance.userId === userIdInt);
 
-    if (!userActivity || !userAverageSessions || !userPerformance) {
-        throw new Error('Related data not found');
-    }
-
     const formattedUserData = new UserDataModel(userData, userActivity, userAverageSessions, userPerformance);
 
     return formattedUserData;
