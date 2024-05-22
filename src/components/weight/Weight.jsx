@@ -1,12 +1,27 @@
+import  { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
-import { USER_ACTIVITY } from '../../assets/data/data';
+import fetchUserData from '../../services/userService';
 import "./weight.css";
 
 function Weight({ userId }) {
-    const userData = USER_ACTIVITY.find((user) => user.userId === parseInt(userId));
+    const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        try {
+            const data = fetchUserData(userId);
+            setUserData(data);
+        } catch (err) {
+            setError(err.message);
+        }
+    }, [userId]);
+
+    if (error) {
+        return <div className="error">{error}</div>;
+    }
 
     if (!userData) {
-        return <div>User not found</div>;
+        return <div className="loading">Loading...</div>;
     }
 
     const CustomTooltip = ({ active, payload }) => {
@@ -35,7 +50,7 @@ function Weight({ userId }) {
                 width="100%"
                 height={300}>
                 <BarChart
-                    data={userData.sessions}
+                    data={userData.activity}
                     margin={{
                         top: 5,
                         right: 30,

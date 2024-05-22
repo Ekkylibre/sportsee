@@ -1,19 +1,22 @@
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { USER_AVERAGE_SESSIONS } from '../../assets/data/data';
+import fetchUserData from '../../services/userService';
 import "./goals.css";
 
 function Goals({ userId }) {
-    const userData = USER_AVERAGE_SESSIONS.find((user) => user.userId === parseInt(userId, 10));
-
-    if (!userData) {
+    let userData;
+    try {
+        userData = fetchUserData(userId);
+    } catch (error) {
         return <div>User not found</div>;
     }
+
+    const { averageSessions } = userData;
 
     // Ajouter des points fictifs au début et à la fin des sessions
     const sessionsWithFictives = [
         { day: 0, sessionLength: null },
-        ...userData.sessions,
-        { day: userData.sessions.length + 1, sessionLength: null }
+        ...averageSessions,
+        { day: averageSessions.length + 1, sessionLength: null }
     ];
 
     // Fonction pour formatter les étiquettes de l'axe X

@@ -1,15 +1,30 @@
+import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import { USER_MAIN_DATA } from '../../assets/data/data';
+import fetchUserData from '../../services/userService';
 import './kpi.css';
 
 function Kpi({ userId }) {
-    const foundUser = USER_MAIN_DATA.find((user) => user.id === parseInt(userId));
+    const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(null);
 
-    if (!foundUser) {
-        return <div>User not found</div>;
+    useEffect(() => {
+        try {
+            const data = fetchUserData(userId);
+            setUserData(data);
+        } catch (err) {
+            setError(err.message);
+        }
+    }, [userId]);
+
+    if (error) {
+        return <div className="error">{error}</div>;
     }
 
-    const todayScore = (foundUser.todayScore ?? foundUser.score) * 100;
+    if (!userData) {
+        return <div className="loading">Loading...</div>;
+    }
+
+    const todayScore = userData.score * 100;
 
     const data = [
         { name: 'Score du jour', value: todayScore },
@@ -20,7 +35,7 @@ function Kpi({ userId }) {
 
     return (
         <div className="kpi-container">
-            <div className='score-title'>Score</div>
+            <div className="score-title">Score</div>
             <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
                     <Pie
@@ -43,7 +58,7 @@ function Kpi({ userId }) {
             </ResponsiveContainer>
             <div className="centered-text">
                 <div>{`${todayScore}%`}</div>
-                <div className='text-container'>de votre objectif</div>
+                <div className="text-container">de votre objectif</div>
             </div>
         </div>
     );
