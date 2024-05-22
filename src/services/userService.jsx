@@ -2,9 +2,12 @@ import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE 
 import UserDataModel from '../models/UserDataModel';
 
 const fetchUserData = (userId) => {
-    const userIdInt = parseInt(userId);
+    // Vérifier si userId est un nombre
+    if (isNaN(userId)) {
+        throw new Error('Invalid userId');
+    }
 
-    const findData = (dataArray, key) => dataArray.find(item => item[key] === userIdInt) || {};
+    const findData = (dataArray, key) => dataArray.find(item => item[key] == userId) || {};
 
     const userData = findData(USER_MAIN_DATA, 'id');
     const userActivity = findData(USER_ACTIVITY, 'userId');
