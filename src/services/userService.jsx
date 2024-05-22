@@ -3,18 +3,19 @@ import UserDataModel from '../models/UserDataModel';
 
 const fetchUserData = (userId) => {
     const userIdInt = parseInt(userId);
-    const userData = USER_MAIN_DATA.find(user => user.id === userIdInt);
-    if (!userData) {
+
+    const findData = (dataArray, key) => dataArray.find(item => item[key] === userIdInt) || {};
+
+    const userData = findData(USER_MAIN_DATA, 'id');
+    const userActivity = findData(USER_ACTIVITY, 'userId');
+    const userAverageSessions = findData(USER_AVERAGE_SESSIONS, 'userId');
+    const userPerformance = findData(USER_PERFORMANCE, 'userId');
+
+    if (!userData.id) {
         throw new Error('User not found');
     }
 
-    const userActivity = USER_ACTIVITY.find(activity => activity.userId === userIdInt);
-    const userAverageSessions = USER_AVERAGE_SESSIONS.find(session => session.userId === userIdInt);
-    const userPerformance = USER_PERFORMANCE.find(performance => performance.userId === userIdInt);
-
-    const formattedUserData = new UserDataModel(userData, userActivity, userAverageSessions, userPerformance);
-
-    return formattedUserData;
+    return new UserDataModel(userData, userActivity, userAverageSessions, userPerformance);
 }
 
 export default fetchUserData;

@@ -1,13 +1,27 @@
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import fetchUserData from '../../services/userService';
 import "./goals.css";
+import { useState, useEffect } from 'react';
 
 function Goals({ userId }) {
-    let userData;
-    try {
-        userData = fetchUserData(userId);
-    } catch (error) {
-        return <div>User not found</div>;
+    const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        try {
+            const data = fetchUserData(userId);
+            setUserData(data);
+        } catch (err) {
+            setError(err.message);
+        }
+    }, [userId]);
+
+    if (error) {
+        return <div>{error}</div>;
+    }
+
+    if (!userData) {
+        return <div>Loading...</div>;
     }
 
     const { averageSessions } = userData;
