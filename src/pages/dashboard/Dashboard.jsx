@@ -39,10 +39,6 @@ function Dashboard() {
   useEffect(() => {
     const foundUser = USER_MAIN_DATA.find((user) => user.id === parseInt(userId));
     setUser(foundUser);
-
-    if (!foundUser) {
-      navigate('/error');
-    }
   }, [userId, navigate]);
 
 
