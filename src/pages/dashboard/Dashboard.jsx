@@ -69,10 +69,10 @@ function Dashboard() {
 
             <div className="nutrients">
               <>
-                <ValueItem nutrientIcon={fireIcon} number={user ? `${user.keyData.calorieCount}kcal` : 'N/A'} title="Calories" />
-                <ValueItem nutrientIcon={chickenIcon} number={user ? `${user.keyData.proteinCount}g` : 'N/A'} title="Protéines" />
-                <ValueItem nutrientIcon={appleIcon} number={user ? `${user.keyData.carbohydrateCount}g` : 'N/A'} title="Glucides" />
-                <ValueItem nutrientIcon={burgerIcon} number={user ? `${user.keyData.lipidCount}g` : 'N/A'} title="Lipides" />
+                <ValueItem nutrientIcon={fireIcon} value={user ? `${user.keyData.calorieCount}kcal` : 'N/A'} title="Calories" />
+                <ValueItem nutrientIcon={chickenIcon} value={user ? `${user.keyData.proteinCount}g` : 'N/A'} title="Protéines" />
+                <ValueItem nutrientIcon={appleIcon} value={user ? `${user.keyData.carbohydrateCount}g` : 'N/A'} title="Glucides" />
+                <ValueItem nutrientIcon={burgerIcon} value={user ? `${user.keyData.lipidCount}g` : 'N/A'} title="Lipides" />
               </>
             </div>
           </div>
