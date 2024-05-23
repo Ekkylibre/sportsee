@@ -1,6 +1,7 @@
+import { useEffect, useState } from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip } from 'recharts';
 import fetchUserData from '../../services/userService';
-import { useEffect, useState } from 'react';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 
 function RadarComponent({ userId }) {
     const [performanceData, setPerformanceData] = useState([]);
@@ -14,14 +15,6 @@ function RadarComponent({ userId }) {
             setError(err.message);
         }
     }, [userId]);
-
-    if (error) {
-        return <div className="error">{error}</div>;
-    }
-
-    if (performanceData.length === 0) {
-        return <div className="loading">Loading...</div>;
-    }
 
     const formatLabel = (value) => {
         switch (value) {
@@ -42,19 +35,24 @@ function RadarComponent({ userId }) {
     })).reverse();
 
     return (
-        <ResponsiveContainer width="100%" height="100%">
-            <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
-                <PolarGrid gridType="polygon" radialLines={false} polarRadius={[0, 20, 40, 60, 80, 100]} />
-                <PolarAngleAxis
-                    dataKey="subject"
-                    tick={{ fill: 'white' }}
-                />
-                <Radar name="Performance" dataKey="value" fill="red" fillOpacity={0.6} />
-                <Tooltip
-                    contentStyle={{ backgroundColor: "rgba(0, 0, 0, 0.8)", color: "white" }}
-                />
-            </RadarChart>
-        </ResponsiveContainer>
+        <>
+            {error && <ErrorMessage message={error} />}
+            {!error && (
+                <ResponsiveContainer width="100%" height="100%">
+                    <RadarChart cx="50%" cy="50%" outerRadius="80%" data={data}>
+                        <PolarGrid gridType="polygon" radialLines={false} polarRadius={[0, 20, 40, 60, 80, 100]} />
+                        <PolarAngleAxis
+                            dataKey="subject"
+                            tick={{ fill: 'white' }}
+                        />
+                        <Radar name="Performance" dataKey="value" fill="red" fillOpacity={0.6} />
+                        <Tooltip
+                            contentStyle={{ backgroundColor: "rgba(0, 0, 0, 0.8)", color: "white" }}
+                        />
+                    </RadarChart>
+                </ResponsiveContainer>
+            )}
+        </>
     );
 }
 

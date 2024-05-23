@@ -2,6 +2,7 @@ import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import fetchUserData from '../../services/userService';
 import "./goals.css";
 import { useState, useEffect } from 'react';
+import ErrorMessage from '../errorMessage/ErrorMessage.jsx';
 
 function Goals({ userId }) {
     const [userData, setUserData] = useState(null);
@@ -15,29 +16,6 @@ function Goals({ userId }) {
             setError(err.message);
         }
     }, [userId]);
-
-    if (error) {
-        return <div>{error}</div>;
-    }
-
-    if (!userData) {
-        return <div>Loading...</div>;
-    }
-
-    const { averageSessions } = userData;
-
-    // Ajouter des points fictifs au début et à la fin des sessions
-    const sessionsWithFictives = [
-        { day: 0, sessionLength: null },
-        ...averageSessions,
-        { day: averageSessions.length + 1, sessionLength: null }
-    ];
-
-    // Fonction pour formatter les étiquettes de l'axe X
-    const formatXAxis = (tickItem) => {
-        const daysOfWeek = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
-        return tickItem > 0 && tickItem <= daysOfWeek.length ? daysOfWeek[tickItem - 1] : '';
-    };
 
     // Composant Tooltip personnalisé
     const CustomTooltip = ({ active, payload }) => {
@@ -70,38 +48,62 @@ function Goals({ userId }) {
         );
     };
 
+    const { averageSessions } = userData || {};
+
+    // Ajouter des points fictifs au début et à la fin des sessions
+    const sessionsWithFictives = [
+        { day: 0, sessionLength: null },
+        ...(averageSessions || []),
+        { day: (averageSessions || []).length + 1, sessionLength: null }
+    ];
+
+    // Fonction pour formatter les étiquettes de l'axe X
+    const formatXAxis = (tickItem) => {
+        const daysOfWeek = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+        return tickItem > 0 && tickItem <= daysOfWeek.length ? daysOfWeek[tickItem - 1] : '';
+    };
+
     return (
-        <div className='goals'>
-            <div className="duration-title">Durée moyenne des sessions</div>
-            <div className="responsive-chart-container">
-                <ResponsiveContainer width="100%" height={263}>
-                    <LineChart
-                        data={sessionsWithFictives}
-                        margin={{ top: 80, right: 0, left: 0, bottom: 20 }}
-                    >
-                        <XAxis
-                            dataKey="day"
-                            axisLine={false}
-                            tickLine={false}
-                            tick={{ fontSize: 12, fontWeight: 500 }}
-                            stroke='rgba(255, 255, 255, 0.5)'
-                            tickFormatter={formatXAxis}
-                        />
-                        <Tooltip
-                            cursor={<CustomCursor />}
-                            content={<CustomTooltip />}
-                        />
-                        <Line
-                            type="monotone"
-                            dataKey="sessionLength"
-                            stroke="#FFFFFF"
-                            strokeWidth={2}
-                            dot={false}
-                        />
-                    </LineChart>
-                </ResponsiveContainer>
-            </div>
-        </div>
+        <>
+            {error && <ErrorMessage message={error} />}
+            {!error && (
+                <div className='goals'>
+                    {userData && (
+                        <>
+                            <div className="duration-title">Durée moyenne des sessions</div>
+                            <div className="responsive-chart-container">
+                                <ResponsiveContainer width="100%" height={263}>
+                                    <LineChart
+                                        data={sessionsWithFictives}
+                                        margin={{ top: 80, right: 0, left: 0, bottom: 20 }}
+                                    >
+                                        <XAxis
+                                            dataKey="day"
+                                            axisLine={false}
+                                            tickLine={false}
+                                            tick={{ fontSize: 12, fontWeight: 500 }}
+                                            stroke='rgba(255, 255, 255, 0.5)'
+                                            tickFormatter={formatXAxis}
+                                        />
+                                        <Tooltip
+                                            cursor={<CustomCursor />}
+                                            content={<CustomTooltip />}
+                                        />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="sessionLength"
+                                            stroke="#FFFFFF"
+                                            strokeWidth={2}
+                                            dot={false}
+                                        />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            </div>
+                        </>
+                    )}
+                </div>
+            )}
+        </>
     );
 }
 
