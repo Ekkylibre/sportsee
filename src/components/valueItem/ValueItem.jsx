@@ -55,17 +55,13 @@ function ValueItem({ userId, title, iconIndex }) {
 
   return (
     <div className="value">
-      {error ? (
-        <div className="error">{error}</div>
-      ) : (
-        <>
-          <div>{nutrientIcons[iconIndex]}</div>
-          <div>
-            <div className="value-display">{value}</div>
-            <div className="title">{title}</div>
-          </div>
-        </>
-      )}
+      <>
+        <div>{nutrientIcons[iconIndex]}</div>
+        <div>
+          <div className="value-display">{error ? "N/A" : value}</div>
+          <div className="title">{title}</div>
+        </div>
+      </>
     </div>
   );
 }

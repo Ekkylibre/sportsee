@@ -4,7 +4,7 @@ import UserDataModel from '../models/UserDataModel';
 const fetchUserData = (userId) => {
     // Vérifier si userId est un nombre
     if (isNaN(userId)) {
-        throw new Error('Invalid userId');
+        throw new Error("L'identifiant de l'utilisateur est invalide. Veuillez fournir un identifiant valide et réessayer.");
     }
 
     const findData = (dataArray, key) => dataArray.find(item => item[key] == userId) || {};
@@ -15,7 +15,7 @@ const fetchUserData = (userId) => {
     const userPerformance = findData(USER_PERFORMANCE, 'userId');
 
     if (!userData.id) {
-        throw new Error('User not found');
+        throw new Error("Utilisateur non trouvé. Veuillez vérifier les informations saisies et réessayer.");
     }
 
     return new UserDataModel(userData, userActivity, userAverageSessions, userPerformance);
