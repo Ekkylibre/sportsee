@@ -30,7 +30,7 @@ function Dashboard() {
       <main>
         <div className="main-container">
           <div className="title">
-          <Header user={user} />
+               <Header userId={userId} />
           </div>
 
           <div className="array">
