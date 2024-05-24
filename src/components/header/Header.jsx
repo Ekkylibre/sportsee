@@ -1,8 +1,8 @@
-import './header.css';
+import "./header.css"
 
 function Header({ user }) {
   return (
-    <div className="header">
+    <div>
       {user && (
         <>
           <h1>Bonjour <span className="red">{user.userInfos.firstName}</span></h1>
