@@ -9,6 +9,7 @@ import Kpi from "../../components/kpi/Kpi";
 import Radar from "../../components/radar/Radar";
 import Weight from "../../components/weight/Weight";
 import Goals from "../../components/goals/Goals";
+import Header from "../../components/header/Header";
 
 function Dashboard() {
 
@@ -29,12 +30,7 @@ function Dashboard() {
       <main>
         <div className="main-container">
           <div className="title">
-            {user && (
-              <>
-                <h1>Bonjour <span className="red">{user.userInfos.firstName}</span></h1>
-                <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
-              </>
-            )}
+          <Header user={user} />
           </div>
 
           <div className="array">
