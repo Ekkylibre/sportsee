@@ -49,10 +49,10 @@ function Dashboard() {
 
             <div className="nutrients">
               <>
-                <ValueItem iconIndex={0} value={user ? `${user.keyData.calorieCount}kcal` : 'N/A'} title="Calories" />
-                <ValueItem iconIndex={1} value={user ? `${user.keyData.proteinCount}g` : 'N/A'} title="Protéines" />
-                <ValueItem iconIndex={2} value={user ? `${user.keyData.carbohydrateCount}g` : 'N/A'} title="Glucides" />
-                <ValueItem iconIndex={3} value={user ? `${user.keyData.lipidCount}g` : 'N/A'} title="Lipides" />
+                <ValueItem userId={userId} iconIndex={0} value={user ? `${user.keyData.calorieCount}kcal` : 'N/A'} title="Calories" />
+                <ValueItem userId={userId} iconIndex={1} value={user ? `${user.keyData.proteinCount}g` : 'N/A'} title="Protéines" />
+                <ValueItem userId={userId} iconIndex={2} value={user ? `${user.keyData.carbohydrateCount}g` : 'N/A'} title="Glucides" />
+                <ValueItem userId={userId} iconIndex={3} value={user ? `${user.keyData.lipidCount}g` : 'N/A'} title="Lipides" />
               </>
             </div>
           </div>

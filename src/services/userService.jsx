@@ -4,7 +4,7 @@ import UserDataModel from '../models/UserDataModel';
 const fetchUserData = (userId) => {
     // Vérifier si userId est un nombre
     if (isNaN(userId)) {
-        throw new Error('Invalid userId');
+        throw new Error('Error: Invalid userId');
     }
 
     const findData = (dataArray, key) => dataArray.find(item => item[key] == userId) || {};
