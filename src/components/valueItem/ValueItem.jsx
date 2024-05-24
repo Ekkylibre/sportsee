@@ -56,7 +56,7 @@ function ValueItem({ userId, title, iconIndex }) {
   return (
     <div className="value">
       {error ? (
-        <div className="error">Error: {error}</div>
+        <div className="error">{error}</div>
       ) : (
         <>
           <div>{nutrientIcons[iconIndex]}</div>
