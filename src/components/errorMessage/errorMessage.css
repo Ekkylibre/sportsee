@@ -1,0 +1,10 @@
+.error-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+}
+.error-message .error-message-content {
+  color: black;
+}/*# sourceMappingURL=errorMessage.css.map */

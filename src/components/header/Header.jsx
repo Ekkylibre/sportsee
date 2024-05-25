@@ -9,12 +9,12 @@ function Header({ userId }) {
   useEffect(() => {
     try {
       if (!/^\d+$/.test(userId)) {
-        throw new Error('Invalid userId');
+        throw new Error('');
       }
       
       const foundUser = USER_MAIN_DATA.find((user) => user.id === parseInt(userId));
       if (!foundUser) {
-        throw new Error('User not found');
+        throw new Error('');
       }
       
       setUser(foundUser);
@@ -29,10 +29,10 @@ function Header({ userId }) {
         <p className="error">{error}</p>
       )}
       {user && user.userInfos.firstName && (
-        <>
+        <div className="title">
           <h1>Bonjour <span className="red">{user.userInfos.firstName}</span></h1>
           <p>Félicitations ! Vous avez explosé vos objectifs hier 👏</p>
-        </>
+        </div>
       )}
     </div>
   );

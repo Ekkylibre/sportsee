@@ -1,5 +1,9 @@
+import "./errorMessage.css";
+
 function ErrorMessage({ message }) {
-  return <div className="custom-error-message">{message}</div>;
+  return <div className="error-message">
+    <div className="error-message-content">{message}</div>
+    </div>;
 }
 
 export default ErrorMessage;
