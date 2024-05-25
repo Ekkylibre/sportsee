@@ -13,12 +13,6 @@ class UserDataModel {
             kind: userPerformance.kind[item.kind]
         }));
     }
-
-    getFullName() {
-        return `${this.firstName} ${this.lastName}`;
-    }
-
-    // Ajoutez d'autres méthodes de transformation si nécessaire
 }
 
 export default UserDataModel;

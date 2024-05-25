@@ -2,7 +2,7 @@ import { USER_MAIN_DATA, USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_PERFORMANCE 
 import UserDataModel from '../models/UserDataModel';
 
 const fetchUserData = (userId) => {
-    // Vérifier si userId est un nombre
+
     if (isNaN(userId)) {
         throw new Error("L'identifiant de l'utilisateur est invalide. Veuillez fournir un identifiant valide et réessayer.");
     }
