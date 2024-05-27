@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .goals {
   position: relative;
   max-width: 100%;
@@ -20,7 +19,7 @@
 }
 
 .recharts-cartesian-axis-tick {
-  padding-top: 20px; /* Ajoutez l'espace désiré en haut de l'axe des abscisses */
+  padding-top: 20px;
 }
 
 .custom-error-message {
@@ -30,5 +29,4 @@
 
 .custom-loading-message {
   color: blue;
-  /* Autres styles personnalisés */
 }/*# sourceMappingURL=goals.css.map */
