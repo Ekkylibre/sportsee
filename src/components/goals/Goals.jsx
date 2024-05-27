@@ -1,7 +1,6 @@
+import { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import fetchUserData from '../../services/userService';
-import "./goals.css";
-import { useState, useEffect } from 'react';
 import ErrorMessage from '../errorMessage/ErrorMessage.jsx';
 
 function Goals({ userId }) {
@@ -17,7 +16,6 @@ function Goals({ userId }) {
         }
     }, [userId]);
 
-    // Composant Tooltip personnalisé
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
             return (
@@ -26,16 +24,12 @@ function Goals({ userId }) {
                 </div>
             );
         }
-
         return null;
     };
 
-    // Composant Cursor personnalisé
     const CustomCursor = ({ points, width }) => {
         if (!points || points.length === 0) return null;
-
         const { x } = points[0];
-
         return (
             <rect
                 x={x}
@@ -49,15 +43,12 @@ function Goals({ userId }) {
     };
 
     const { averageSessions } = userData || {};
-
-    // Ajouter des points fictifs au début et à la fin des sessions
     const sessionsWithFictives = [
         { day: 0, sessionLength: null },
         ...(averageSessions || []),
         { day: (averageSessions || []).length + 1, sessionLength: null }
     ];
 
-    // Fonction pour formatter les étiquettes de l'axe X
     const formatXAxis = (tickItem) => {
         const daysOfWeek = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
         return tickItem > 0 && tickItem <= daysOfWeek.length ? daysOfWeek[tickItem - 1] : '';

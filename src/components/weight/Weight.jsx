@@ -26,12 +26,10 @@ function Weight({ userId }) {
                 </div>
             );
         }
-
         return null;
     };
 
     const formatXAxis = (tickItem) => {
-        // Extraction du jour à partir de la date
         const date = new Date(tickItem);
         return date.getDate();
     };
