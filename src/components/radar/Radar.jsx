@@ -8,12 +8,16 @@ function RadarComponent({ userId }) {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        try {
-            const data = fetchUserData(userId);
-            setPerformanceData(data.performance);
-        } catch (err) {
-            setError(err.message);
-        }
+        const fetchData = async () => {
+            try {
+                const userData = await fetchUserData(userId);
+                setPerformanceData(userData.performance);
+            } catch (err) {
+                setError(err.message);
+            }
+        };
+
+        fetchData();
     }, [userId]);
 
     const formatLabel = (value) => {

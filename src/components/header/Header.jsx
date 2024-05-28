@@ -1,26 +1,34 @@
 import "./header.css";
 import { useState, useEffect } from "react";
-import { USER_MAIN_DATA } from "../../assets/data/data";
+import axios from 'axios';
+
+const BASE_URL = 'http://localhost:3000';
 
 function Header({ userId }) {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    try {
-      if (!/^\d+$/.test(userId)) {
-        throw new Error('');
+    const fetchUser = async () => {
+      try {
+        if (!/^\d+$/.test(userId)) {
+          throw new Error('Identifiant utilisateur invalide.');
+        }
+
+        const response = await axios.get(`${BASE_URL}/user/${userId}`);
+        const foundUser = response.data.data;
+
+        if (!foundUser) {
+          throw new Error('Utilisateur non trouvé.');
+        }
+
+        setUser(foundUser);
+      } catch (error) {
+        setError(error.message);
       }
-      
-      const foundUser = USER_MAIN_DATA.find((user) => user.id === parseInt(userId));
-      if (!foundUser) {
-        throw new Error('');
-      }
-      
-      setUser(foundUser);
-    } catch (error) {
-      setError(error.message);
-    }
+    };
+
+    fetchUser();
   }, [userId]);
 
   return (
