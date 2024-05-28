@@ -15,8 +15,8 @@ function Home() {
                         <p>Choisissez un utilisateur ci-dessous pour accéder au tableau de bord 😄</p>
                     </div>
                     <div className="user-btn">
-                        <Link to="/dashboard/12"><button>User 12</button></Link>
-                        <Link to="/dashboard/18"><button>User 18</button></Link>
+                        <Link to="/dashboard/user/12"><button>User 12</button></Link>
+                        <Link to="/dashboard/user/18"><button>User 18</button></Link>
                     </div>
                 </div>
             </main>

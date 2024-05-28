@@ -27,7 +27,7 @@
   padding: 21px;
   border-radius: 5px;
 }
-.value div .number {
+.value div .value-display {
   font-size: 20px;
   font-weight: 700;
 }

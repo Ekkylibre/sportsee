@@ -6,7 +6,7 @@ import Error from "./pages/error/Error";
 function App() {
   return <Routes>
     <Route path="/" element={<Home />}/>
-    <Route path="/dashboard/:userId" element={<Dashboard />}/>
+    <Route path="/dashboard/user/:userId" element={<Dashboard />}/>
     <Route path="*" element={<Error />}/>
   </Routes>
 }

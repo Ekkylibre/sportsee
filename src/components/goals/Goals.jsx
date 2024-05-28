@@ -1,28 +1,26 @@
+import { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { USER_AVERAGE_SESSIONS } from '../../assets/data/data';
-import "./goals.css";
+import fetchUserData from '../../services/userService';
+import ErrorMessage from '../errorMessage/ErrorMessage.jsx';
+import "./goals.css"
 
 function Goals({ userId }) {
-    const userData = USER_AVERAGE_SESSIONS.find((user) => user.userId === parseInt(userId, 10));
+    const [userData, setUserData] = useState(null);
+    const [error, setError] = useState(null);
 
-    if (!userData) {
-        return <div>User not found</div>;
-    }
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await fetchUserData(userId);
+                setUserData(data);
+            } catch (err) {
+                setError(err.message);
+            }
+        };
 
-    // Ajouter des points fictifs au début et à la fin des sessions
-    const sessionsWithFictives = [
-        { day: 0, sessionLength: null },
-        ...userData.sessions,
-        { day: userData.sessions.length + 1, sessionLength: null }
-    ];
+        fetchData();
+    }, [userId]);
 
-    // Fonction pour formatter les étiquettes de l'axe X
-    const formatXAxis = (tickItem) => {
-        const daysOfWeek = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
-        return tickItem > 0 && tickItem <= daysOfWeek.length ? daysOfWeek[tickItem - 1] : '';
-    };
-
-    // Composant Tooltip personnalisé
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
             return (
@@ -31,16 +29,12 @@ function Goals({ userId }) {
                 </div>
             );
         }
-
         return null;
     };
 
-    // Composant Cursor personnalisé
     const CustomCursor = ({ points, width }) => {
         if (!points || points.length === 0) return null;
-
         const { x } = points[0];
-
         return (
             <rect
                 x={x}
@@ -53,38 +47,55 @@ function Goals({ userId }) {
         );
     };
 
+    const { averageSessions } = userData || {};
+    const sessionsWithFictives = [
+        { day: 0, sessionLength: null },
+        ...(averageSessions || []),
+        { day: (averageSessions || []).length + 1, sessionLength: null }
+    ];
+
+    const formatXAxis = (tickItem) => {
+        const daysOfWeek = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+        return tickItem > 0 && tickItem <= daysOfWeek.length ? daysOfWeek[tickItem - 1] : '';
+    };
+
     return (
-        <div className='goals'>
-            <div className="duration-title">Durée moyenne des sessions</div>
-            <div className="responsive-chart-container">
-                <ResponsiveContainer width="100%" height={263}>
-                    <LineChart
-                        data={sessionsWithFictives}
-                        margin={{ top: 80, right: 0, left: 0, bottom: 20 }}
-                    >
-                        <XAxis
-                            dataKey="day"
-                            axisLine={false}
-                            tickLine={false}
-                            tick={{ fontSize: 12, fontWeight: 500 }}
-                            stroke='rgba(255, 255, 255, 0.5)'
-                            tickFormatter={formatXAxis}
-                        />
-                        <Tooltip
-                            cursor={<CustomCursor />}
-                            content={<CustomTooltip />}
-                        />
-                        <Line
-                            type="monotone"
-                            dataKey="sessionLength"
-                            stroke="#FFFFFF"
-                            strokeWidth={2}
-                            dot={false}
-                        />
-                    </LineChart>
-                </ResponsiveContainer>
-            </div>
-        </div>
+        <>
+            {error && <ErrorMessage message={error} />}
+            {!error && userData && (
+                <div className='goals'>
+                    <div className="duration-title">Durée moyenne des sessions</div>
+                    <div className="responsive-chart-container">
+                        <ResponsiveContainer width="100%" height={263}>
+                            <LineChart
+                                data={sessionsWithFictives}
+                                margin={{ top: 80, right: 0, left: 0, bottom: 20 }}
+                            >
+                                <XAxis
+                                    dataKey="day"
+                                    axisLine={false}
+                                    tickLine={false}
+                                    tick={{ fontSize: 12, fontWeight: 500 }}
+                                    stroke='rgba(255, 255, 255, 0.5)'
+                                    tickFormatter={formatXAxis}
+                                />
+                                <Tooltip
+                                    cursor={<CustomCursor />}
+                                    content={<CustomTooltip />}
+                                />
+                                <Line
+                                    type="monotone"
+                                    dataKey="sessionLength"
+                                    stroke="#FFFFFF"
+                                    strokeWidth={2}
+                                    dot={false}
+                                />
+                            </LineChart>
+                        </ResponsiveContainer>
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
 

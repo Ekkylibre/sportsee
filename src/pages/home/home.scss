@@ -14,18 +14,6 @@ main {
         flex-direction: column;
         gap: 41px;
 
-        .title {
-            display: flex;
-            flex-direction: column;
-            gap: 41px;
-
-            h1 {
-                .red {
-                    color: red;
-                }
-            }
-        }
-
         .user-btn {
             display: flex;
             gap: 41px;
