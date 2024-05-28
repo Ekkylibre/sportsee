@@ -1,6 +1,6 @@
 {
     "source": {
-      "include": ["src"],
+      "include": ["src/components", "src/models", "src/services"],
       "exclude": ["node_modules"]
     },
     "opts": {
