@@ -4,11 +4,33 @@ import fetchUserData from '../../services/userService';
 import ErrorMessage from '../errorMessage/ErrorMessage.jsx';
 import "./goals.css"
 
+/**
+ * Composant pour afficher les objectifs de l'utilisateur.
+ *
+ * @component
+ * @param {Object} props Les propriétés du composant.
+ * @param {number} props.userId L'identifiant de l'utilisateur.
+ * @returns {JSX.Element} Le composant Goals.
+ */
 function Goals({ userId }) {
+    /**
+     * Les données de l'utilisateur.
+     * @type {Object|null}
+     */
     const [userData, setUserData] = useState(null);
+    
+    /**
+     * Message d'erreur en cas de problème.
+     * @type {string|null}
+     */
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        /**
+         * Fonction pour récupérer les données de l'utilisateur.
+         * @async
+         * @returns {Promise<void>}
+         */
         const fetchData = async () => {
             try {
                 const data = await fetchUserData(userId);
@@ -21,6 +43,13 @@ function Goals({ userId }) {
         fetchData();
     }, [userId]);
 
+    /**
+     * Composant personnalisé pour afficher le tooltip.
+     * @param {Object} props Les propriétés du composant.
+     * @param {boolean} props.active Si le tooltip est actif.
+     * @param {Object[]} props.payload Les données du tooltip.
+     * @returns {JSX.Element} Le composant CustomTooltip.
+     */
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
             return (
@@ -32,6 +61,13 @@ function Goals({ userId }) {
         return null;
     };
 
+    /**
+     * Composant personnalisé pour afficher le curseur.
+     * @param {Object} props Les propriétés du composant.
+     * @param {Object[]} props.points Les points du curseur.
+     * @param {number} props.width La largeur du curseur.
+     * @returns {JSX.Element|null} Le composant CustomCursor.
+     */
     const CustomCursor = ({ points, width }) => {
         if (!points || points.length === 0) return null;
         const { x } = points[0];
@@ -54,6 +90,11 @@ function Goals({ userId }) {
         { day: (averageSessions || []).length + 1, sessionLength: null }
     ];
 
+    /**
+     * Fonction pour formater l'axe des abscisses.
+     * @param {number} tickItem La valeur du tick.
+     * @returns {string} Le formaté de l'axe des abscisses.
+     */
     const formatXAxis = (tickItem) => {
         const daysOfWeek = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
         return tickItem > 0 && tickItem <= daysOfWeek.length ? daysOfWeek[tickItem - 1] : '';

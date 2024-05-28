@@ -1,0 +1,10 @@
+{
+    "source": {
+      "include": ["src/components", "src/models", "src/services"],
+      "exclude": ["node_modules"]
+    },
+    "opts": {
+      "destination": "./docs"
+    }
+  }
+  

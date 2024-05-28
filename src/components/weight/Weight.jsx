@@ -4,6 +4,14 @@ import fetchUserData from '../../services/userService';
 import "./weight.css";
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
+/**
+ * Composant pour afficher l'activité quotidienne de l'utilisateur sous forme de graphique.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {number} props.userId - L'identifiant de l'utilisateur.
+ * @returns {JSX.Element} Le composant Weight.
+ */
 function Weight({ userId }) {
     const [userData, setUserData] = useState(null);
     const [error, setError] = useState(null);
@@ -21,6 +29,14 @@ function Weight({ userId }) {
         fetchData();
     }, [userId]);
 
+    /**
+     * Composant de tooltip personnalisé pour le graphique.
+     *
+     * @param {Object} props - Les propriétés du composant.
+     * @param {boolean} props.active - Indique si le tooltip est actif.
+     * @param {Array} props.payload - Les données du tooltip.
+     * @returns {JSX.Element|null} Le tooltip personnalisé.
+     */
     const CustomTooltip = ({ active, payload }) => {
         if (active && payload && payload.length) {
             return (
@@ -33,6 +49,12 @@ function Weight({ userId }) {
         return null;
     };
 
+    /**
+     * Formate les valeurs de l'axe X pour afficher uniquement le jour du mois.
+     *
+     * @param {string} tickItem - La valeur de l'axe X.
+     * @returns {number} Le jour du mois.
+     */
     const formatXAxis = (tickItem) => {
         const date = new Date(tickItem);
         return date.getDate();
