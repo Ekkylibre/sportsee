@@ -24,7 +24,11 @@ function Header({ userId }) {
 
         setUser(foundUser);
       } catch (error) {
-        setError(error.message);
+        if (error.response && error.response.status === 404) {
+          setError('Utilisateur non trouvé.');
+        } else {
+          setError('Erreur lors de la récupération de l\'utilisateur.');
+        }
       }
     };
 
