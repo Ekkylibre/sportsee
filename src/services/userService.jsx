@@ -1,8 +1,17 @@
 import axios from 'axios';
 import UserDataModel from '../models/UserDataModel';
 
-const API_BASE_URL = 'http://localhost:3000'; // Remplacez cette URL par l'URL de votre API si nécessaire
+const API_BASE_URL = 'http://localhost:3000';
 
+/**
+ * Récupère les données de l'utilisateur à partir de l'API.
+ *
+ * @async
+ * @function
+ * @param {number} userId - L'identifiant de l'utilisateur.
+ * @returns {Promise<UserDataModel>} Les données de l'utilisateur sous forme de modèle.
+ * @throws {Error} Lance une erreur si l'identifiant de l'utilisateur est invalide ou si une erreur se produit lors de la récupération des données.
+ */
 const fetchUserData = async (userId) => {
     if (isNaN(userId)) {
         throw new Error("L'identifiant de l'utilisateur est invalide. Veuillez fournir un identifiant valide et réessayer.");

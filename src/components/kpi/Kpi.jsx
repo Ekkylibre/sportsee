@@ -4,11 +4,33 @@ import fetchUserData from '../../services/userService';
 import './kpi.css';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
+/**
+ * Composant pour afficher les indicateurs de performance clés.
+ *
+ * @component
+ * @param {Object} props Les propriétés du composant.
+ * @param {number} props.userId L'identifiant de l'utilisateur.
+ * @returns {JSX.Element} Le composant Kpi.
+ */
 function Kpi({ userId }) {
+    /**
+     * Les données de l'utilisateur.
+     * @type {Object|null}
+     */
     const [userData, setUserData] = useState(null);
+
+    /**
+     * Message d'erreur en cas de problème.
+     * @type {string|null}
+     */
     const [error, setError] = useState(null);
 
     useEffect(() => {
+        /**
+         * Fonction pour récupérer les données de l'utilisateur.
+         * @async
+         * @returns {Promise<void>}
+         */
         const fetchData = async () => {
             try {
                 const data = await fetchUserData(userId);
@@ -21,13 +43,25 @@ function Kpi({ userId }) {
         fetchData();
     }, [userId]);
 
+    /**
+     * Score du jour de l'utilisateur.
+     * @type {number}
+     */
     const todayScore = userData ? userData.score * 100 : 0;
 
+    /**
+     * Données pour le graphique circulaire.
+     * @type {Array<Object>}
+     */
     const data = [
         { name: 'Score du jour', value: todayScore },
         { name: 'Reste', value: 100 - todayScore }
     ];
 
+    /**
+     * Couleurs pour les tranches du graphique.
+     * @type {Array<string>}
+     */
     const COLORS = ['#e60000', 'transparent'];
 
     return (
