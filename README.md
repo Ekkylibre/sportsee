@@ -7,57 +7,65 @@
 
 ## Description
 
-Ce projet consiste à développer une nouvelle version de la page profil utilisateur pour SportSee, une startup dédiée au coaching sportif. La page permet aux utilisateurs de suivre leur activité sportive, notamment le nombre de sessions réalisées et les calories brûlées.
+Bienvenue dans le repository de la nouvelle page profil utilisateur de SportSee ! Ce projet, développé en React, vise à offrir une expérience améliorée pour nos utilisateurs en leur permettant de suivre leurs sessions sportives et les calories brûlées.
 
-## Table des Matières
+## Instructions d'Installation
 
-1. Installation
-2. Utilisation
-3. Technologies
-
-### Installation
-
-#### Prérequis
-- Node.js
-- npm (ou yarn)
-
-#### Étapes
-
-1. Clonez le dépôt :
+1. Clonez ce repository sur votre machine locale :
 
    ```bash
-   git clone https://github.com/sportsee/profil-utilisateur.git
-2. Accédez au répertoire du projet :
-   
-   ```bash
-    cd profil-utilisateur
-3. Installez les dépendances :
+   git clone https://github.com/votre-utilisateur/nom-du-repo.git
+2. Installez les dépendances nécessaires en exécutant l'une des commandes suivantes à la racine du projet :
 
+    Avec npm :
     ```bash
     npm install
-    # ou
+    ```
+
+    
+    Avec yarn :
+    ```bash
     yarn install
-4. Démarrez l'application React :
+    ```
+
+3. Démarrez le serveur de développement :
    
-   ```bash
-    cd ../frontend
+    Avec npm :
+    ```bash
     npm start
-### Utilisation
+    ```
 
-#### Démarrage du Projet
-Après avoir suivi les étapes d'installation, le projet sera accessible sur http://localhost:5173.
+    Avec yarn :
+    ```bash
+    yarn start
+    ```
+4. Accédez à l'application dans votre navigateur en ouvrant l'URL suivante : http://localhost:5173
 
-#### Fonctionnalités
+## Prérequis
+Assurez-vous d'avoir Node.js installé sur votre machine.
 
-- Affichage du nombre de sessions réalisées.
-- Affichage des calories brûlées.
-- Graphiques interactifs représentant l'activité sportive de l'utilisateur.
-  
-### Technologies
+## Maquette et User Stories
+- [Lien Figma de la maquette](https://www.figma.com/design/BMomGVZqLZb811mDMShpLu/UI-design-Sportify-FR?node-id=0-1&t=U9XKtWmvd5UzsrBY-0)
+- [Kanban avec les User Stories](https://openclassrooms.notion.site/Tableau-de-bord-SportSee-6686aa4b5f44417881a4884c9af5669e)
 
-- HTML : Pour structurer le contenu.
-- SCSS : Pour le style de l'application.
-- JavaScript : Pour la logique de l'application
-- React : Bibliothèque JavaScript pour construire des interfaces utilisateur.
-- D3 ou Recharts : Bibliothèques pour créer des graphiques.
-- Node.js : Environnement pour exécuter JavaScript sur le serveur.
+## Fonctionnalités
+- Affichage du nombre de sessions réalisées par l'utilisateur.
+- Suivi du nombre de calories brûlées.
+- Intégration de graphiques d'activité sportive grâce à D3 ou Recharts.
+- Intégration de la partie desktop uniquement pour l'instant (version mobile et tablette à venir).
+
+## Mock de l'API
+Pour faciliter le développement, un backend utilisant NodeJS a été créé pour fournir des données d'exemple. Vous pouvez le trouver [ici]([URL_du_lien](https://github.com/OpenClassrooms-Student-Center/P9-front-end-dashboard)).
+
+## Standardisation des Données
+Le schéma de données peut varier en fonction des utilisateurs. Assurez-vous de standardiser les données venant de l'API pour les formatter correctement avant de les utiliser dans l'application.
+
+## Service de Calls HTTP
+Créez un service dédié à la gestion des calls HTTP en dehors des composants React. Utilisez Fetch ou Axios pour réaliser les appels à l'API.
+
+## Documentation
+Documentez votre projet pour faciliter la collaboration. Vous pouvez utiliser un Readme, de la JSDoc ou des proptypes pour cela.
+
+## Auteur
+
+Développé avec ❤️ par [Dany XIONG](https://github.com/Ekkylibre).
