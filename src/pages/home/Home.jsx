@@ -3,6 +3,7 @@ import SideBar from "../../components/verticalBar/VerticalBar";
 import "./home.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Toggle from "../../components/toggle/Toggle";
 
 function Home() {
     const [useApiData, setUseApiData] = useState(true); // État pour basculer entre API et données statiques
@@ -22,11 +23,7 @@ function Home() {
                         <p>Choisissez un utilisateur ci-dessous pour accéder au tableau de bord 😄</p>
                     </div>
 
-                    <label className="switch">
-                        <input type="checkbox" checked={useApiData} onChange={handleToggle} />
-                        <span className="slider"></span>
-                        <span className="toggle-text">{useApiData ? 'API' : 'Statique'}</span>
-                    </label>
+                    <Toggle checked={useApiData} onChange={handleToggle} />
 
                     <div className="user-btn">
                         <Link to={`/dashboard/user/12?useApiData=${useApiData}`}><button>User 12</button></Link>
