@@ -9,7 +9,7 @@ import Radar from "../../components/radar/Radar";
 import Weight from "../../components/weight/Weight";
 import Goals from "../../components/goals/Goals";
 import Header from "../../components/header/Header";
-import fetchUserData from "../../services/userService";
+import { fetchUserData } from '../../services/userService';
 
 function Dashboard() {
 

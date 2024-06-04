@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip } from 'recharts';
-import fetchUserData from '../../services/userService';
+import { fetchUserData } from '../../services/userService';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 /**

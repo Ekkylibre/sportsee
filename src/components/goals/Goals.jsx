@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import fetchUserData from '../../services/userService';
+import { fetchUserData } from '../../services/userService';
 import ErrorMessage from '../errorMessage/ErrorMessage.jsx';
 import "./goals.css"
 
