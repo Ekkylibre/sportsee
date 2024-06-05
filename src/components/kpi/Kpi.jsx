@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
-import fetchUserData from '../../services/userService';
+import { fetchUserData } from '../../services/userService';
 import './kpi.css';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 

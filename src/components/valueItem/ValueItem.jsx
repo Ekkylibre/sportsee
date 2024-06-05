@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import './valueItem.css';
-import fetchUserData from '../../services/userService';
+import { fetchUserData } from '../../services/userService';
 
 /**
  * Composant pour afficher une valeur nutritionnelle.

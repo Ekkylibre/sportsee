@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
-import fetchUserData from '../../services/userService';
+import { fetchUserData } from '../../services/userService';
 import "./weight.css";
 import ErrorMessage from '../errorMessage/ErrorMessage';
 

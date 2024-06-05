@@ -1,7 +1,7 @@
 import NavBar from "../../components/navBar/NavBar";
 import SideBar from "../../components/verticalBar/VerticalBar";
 import "./dashboard.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ValueItem from "../../components/valueItem/ValueItem";
 import Kpi from "../../components/kpi/Kpi";
@@ -9,12 +9,11 @@ import Radar from "../../components/radar/Radar";
 import Weight from "../../components/weight/Weight";
 import Goals from "../../components/goals/Goals";
 import Header from "../../components/header/Header";
-import fetchUserData from "../../services/userService";
+import { fetchUserData } from '../../services/userService';
 
 function Dashboard() {
 
   const { userId } = useParams();
-  const navigate = useNavigate();
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -24,12 +23,11 @@ function Dashboard() {
         setUser(userData);
       } catch (error) {
         console.error("Error fetching user data:", error);
-        navigate("/error");
       }
     };
 
     fetchData();
-  }, [userId, navigate]);
+  }, [userId]);
 
 
   return (

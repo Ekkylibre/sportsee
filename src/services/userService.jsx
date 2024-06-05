@@ -1,5 +1,6 @@
 import axios from 'axios';
 import UserDataModel from '../models/UserDataModel';
+import { USER_ACTIVITY, USER_AVERAGE_SESSIONS, USER_MAIN_DATA, USER_PERFORMANCE } from '../assets/data/data';
 
 const API_BASE_URL = 'http://localhost:3000';
 
@@ -35,4 +36,32 @@ const fetchUserData = async (userId) => {
     }
 };
 
-export default fetchUserData;
+/**
+ * Récupère les données de l'utilisateur en utilisant les données mock.
+ *
+ * @param {number} userId - L'identifiant de l'utilisateur.
+ * @returns {UserDataModel|null} Les données de l'utilisateur sous forme de modèle, ou null si l'utilisateur n'existe pas.
+ */
+const fetchUserDataMock = (userId) => {
+    // Recherche de l'utilisateur dans les données mock USER_MAIN_DATA
+    const userData = USER_MAIN_DATA.find(user => user.id === userId);
+
+    // Si l'utilisateur n'existe pas, retourner null
+    if (!userData) {
+        return null;
+    }
+
+    // Recherche des activités de l'utilisateur dans les données mock USER_ACTIVITY
+    const userActivity = USER_ACTIVITY.find(activity => activity.userId === userId);
+
+    // Recherche des sessions moyennes de l'utilisateur dans les données mock USER_AVERAGE_SESSIONS
+    const userAverageSessions = USER_AVERAGE_SESSIONS.find(session => session.userId === userId);
+
+    // Recherche des performances de l'utilisateur dans les données mock USER_PERFORMANCE
+    const userPerformance = USER_PERFORMANCE.find(performance => performance.userId === userId);
+
+    // Création et retour du modèle de données utilisateur
+    return new UserDataModel(userData, userActivity, userAverageSessions, userPerformance);
+};
+
+export { fetchUserData, fetchUserDataMock };

@@ -52,4 +52,13 @@ main .main-container .user-btn button:before {
 main .main-container .user-btn button:hover::before {
   top: -30px;
   left: -30px;
+}
+main .main-container .toggle-container {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+main .main-container .toggle-container span {
+  margin-left: 10px;
+  font-size: 1.2em;
 }/*# sourceMappingURL=home.css.map */
