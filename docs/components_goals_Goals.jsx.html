@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/goals/Goals.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/goals/Goals.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useEffect, useState } from 'react';
+import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { fetchUserAverageSessions } from '../../services/userService';
+import ErrorMessage from '../errorMessage/ErrorMessage.jsx';
+import "./goals.css"
+
+/**
+ * Composant pour afficher les objectifs de l'utilisateur.
+ *
+ * @component
+ * @param {Object} props Les propriétés du composant.
+ * @param {number} props.userId L'identifiant de l'utilisateur.
+ * @returns {JSX.Element} Le composant Goals.
+ */
+function Goals({ userId }) {
+    const [averageSessions, setAverageSessions] = useState(null);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await fetchUserAverageSessions(userId);
+                setAverageSessions(data.sessions);
+            } catch (err) {
+                setError(err.message);
+            }
+        };
+
+        fetchData();
+    }, [userId]);
+
+    const CustomTooltip = ({ active, payload }) => {
+        if (active &amp;&amp; payload &amp;&amp; payload.length) {
+            return (
+                &lt;div className="custom-tooltip">
+                    &lt;p className="label">{`${payload[0].payload.sessionLength} min`}&lt;/p>
+                &lt;/div>
+            );
+        }
+        return null;
+    };
+
+    const CustomCursor = ({ points, width }) => {
+        if (!points || points.length === 0) return null;
+        const { x } = points[0];
+        return (
+            &lt;rect
+                x={x}
+                y={0}
+                width={width}
+                height="300px"
+                fill="black"
+                opacity={0.2}
+            />
+        );
+    };
+
+    const sessionsWithFictives = [
+        { day: 0, sessionLength: null },
+        ...(averageSessions || []),
+        { day: (averageSessions || []).length + 1, sessionLength: null }
+    ];
+
+    const formatXAxis = (tickItem) => {
+        const daysOfWeek = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+        return tickItem > 0 &amp;&amp; tickItem &lt;= daysOfWeek.length ? daysOfWeek[tickItem - 1] : '';
+    };
+
+    return (
+        &lt;>
+            {error &amp;&amp; &lt;ErrorMessage message={error} />}
+            {!error &amp;&amp; averageSessions &amp;&amp; (
+                &lt;div className='goals'>
+                    &lt;div className="duration-title">Durée moyenne des sessions&lt;/div>
+                    &lt;div className="responsive-chart-container">
+                        &lt;ResponsiveContainer width="100%" height={263}>
+                            &lt;LineChart
+                                data={sessionsWithFictives}
+                                margin={{ top: 80, right: 0, left: 0, bottom: 20 }}
+                            >
+                                &lt;XAxis
+                                    dataKey="day"
+                                    axisLine={false}
+                                    tickLine={false}
+                                    tick={{ fontSize: 12, fontWeight: 500 }}
+                                    stroke='rgba(255, 255, 255, 0.5)'
+                                    tickFormatter={formatXAxis}
+                                />
+                                &lt;Tooltip
+                                    cursor={&lt;CustomCursor />}
+                                    content={&lt;CustomTooltip />}
+                                />
+                                &lt;Line
+                                    type="monotone"
+                                    dataKey="sessionLength"
+                                    stroke="#FFFFFF"
+                                    strokeWidth={2}
+                                    dot={false}
+                                />
+                            &lt;/LineChart>
+                        &lt;/ResponsiveContainer>
+                    &lt;/div>
+                &lt;/div>
+            )}
+        &lt;/>
+    );
+}
+
+export default Goals;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="UserActivity.html">UserActivity</a></li><li><a href="UserAverageSessions.html">UserAverageSessions</a></li><li><a href="UserData.html">UserData</a></li><li><a href="UserPerformance.html">UserPerformance</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Goals">Goals</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Kpi">Kpi</a></li><li><a href="global.html#RadarComponent">RadarComponent</a></li><li><a href="global.html#SideBar">SideBar</a></li><li><a href="global.html#ValueItem">ValueItem</a></li><li><a href="global.html#Weight">Weight</a></li><li><a href="global.html#fetchUserActivity">fetchUserActivity</a></li><li><a href="global.html#fetchUserAverageSessions">fetchUserAverageSessions</a></li><li><a href="global.html#fetchUserData">fetchUserData</a></li><li><a href="global.html#fetchUserPerformance">fetchUserPerformance</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jun 06 2024 16:51:06 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

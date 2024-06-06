@@ -12,24 +12,11 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
  * @returns {JSX.Element} Le composant RadarComponent.
  */
 function RadarComponent({ userId }) {
-    /**
-     * Données de performance de l'utilisateur.
-     * @type {Array<Object>}
-     */
-    const [performanceData, setPerformanceData] = useState([]);
 
-    /**
-     * Message d'erreur en cas de problème.
-     * @type {string|null}
-     */
+    const [performanceData, setPerformanceData] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        /**
-         * Fonction pour récupérer les données de performance de l'utilisateur.
-         * @async
-         * @returns {Promise<void>}
-         */
         const fetchData = async () => {
             try {
                 const userPerformance = await fetchUserPerformance(userId);
@@ -42,11 +29,6 @@ function RadarComponent({ userId }) {
         fetchData();
     }, [userId]);
 
-    /**
-     * Formate le label de la performance.
-     * @param {string} value La valeur de la performance.
-     * @returns {string} Le label formaté.
-     */
     const formatLabel = (value) => {
         switch (value) {
             case 'cardio': return 'Cardio';
@@ -59,10 +41,6 @@ function RadarComponent({ userId }) {
         }
     };
 
-    /**
-     * Données pour le graphique radar.
-     * @type {Array<Object>}
-     */
     const data = performanceData.map(item => ({
         subject: formatLabel(item.kind),
         value: item.value,

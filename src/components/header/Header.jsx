@@ -16,13 +16,6 @@ function Header({ userId }) {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
 
-  /**
-   * Utilise useEffect pour récupérer les informations de l'utilisateur lorsqu'un userId est fourni.
-   * 
-   * @function
-   * @async
-   * @throws Will throw an error if the userId is invalid or if the user is not found.
-   */
   useEffect(() => {
     const fetchUser = async () => {
       try {

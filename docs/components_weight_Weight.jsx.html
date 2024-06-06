@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/weight/Weight.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/weight/Weight.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { useEffect, useState } from 'react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
+import { fetchUserActivity } from '../../services/userService';
+import "./weight.css";
+import ErrorMessage from '../errorMessage/ErrorMessage';
+
+/**
+ * Composant pour afficher l'activité quotidienne de l'utilisateur sous forme de graphique.
+ *
+ * @component
+ * @param {Object} props - Les propriétés du composant.
+ * @param {number} props.userId - L'identifiant de l'utilisateur.
+ * @returns {JSX.Element} Le composant Weight.
+ */
+function Weight({ userId }) {
+    const [activityData, setActivityData] = useState([]);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const userActivity = await fetchUserActivity(userId);
+                setActivityData(userActivity.sessions);
+            } catch (err) {
+                setError(err.message);
+            }
+        };
+
+        fetchData();
+    }, [userId]);
+
+    /**
+     * Composant de tooltip personnalisé pour le graphique.
+     *
+     * @param {Object} props - Les propriétés du composant.
+     * @param {boolean} props.active - Indique si le tooltip est actif.
+     * @param {Array} props.payload - Les données du tooltip.
+     * @returns {JSX.Element|null} Le tooltip personnalisé.
+     */
+    const CustomTooltip = ({ active, payload }) => {
+        if (active &amp;&amp; payload &amp;&amp; payload.length) {
+            return (
+                &lt;div className="custom-tooltip">
+                    &lt;p className='kg'>{`${payload[0].value} kg`}&lt;/p>
+                    &lt;p className='kcal'>{`${payload[1].value} kcal`}&lt;/p>
+                &lt;/div>
+            );
+        }
+        return null;
+    };
+
+    /**
+     * Formate les valeurs de l'axe X pour afficher uniquement le jour du mois.
+     *
+     * @param {string} tickItem - La valeur de l'axe X.
+     * @returns {number} Le jour du mois.
+     */
+    const formatXAxis = (tickItem) => {
+        const date = new Date(tickItem);
+        return date.getDate();
+    };
+
+    return (
+        &lt;>
+            {error &amp;&amp; &lt;ErrorMessage message={error} />}
+            {!error &amp;&amp; activityData.length > 0 &amp;&amp; (
+                &lt;div className='weight-container'>
+                    &lt;div className='weight-title'>Activité quotidienne&lt;/div>
+                    &lt;ResponsiveContainer width="100%" height={300}>
+                        &lt;BarChart
+                            data={activityData}
+                            margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                            barSize={10}
+                            barGap={10}
+                        >
+                            &lt;CartesianGrid strokeDasharray="3 3" vertical={false} horizontal={false} />
+                            &lt;XAxis
+                                dataKey="day"
+                                tickFormatter={formatXAxis}
+                                tickLine={false}
+                                tickMargin={15}
+                            />
+                            &lt;YAxis
+                                orientation="right"
+                                axisLine={false}
+                                tickLine={false}
+                                tickMargin={40}
+                                interval={1}
+                                domain={['auto', 'auto']}
+                            />
+                            &lt;Tooltip content={&lt;CustomTooltip />} />
+                            &lt;Legend
+                                wrapperStyle={{
+                                    position: 'absolute',
+                                    fontSize: 14,
+                                    verticalAlign: 'top',
+                                    right: 26,
+                                    top: 23,
+                                    height: 100,
+                                    stroke: 'black'
+                                }}
+                                verticalAlign="top"
+                                align="right"
+                                height={100}
+                                iconType="circle"
+                                iconSize={8}
+                                stroke={'black'}
+                            />
+                            &lt;Bar
+                                dataKey="kilogram"
+                                fill="black"
+                                name="Poids (kg)"
+                                radius={[10, 10, 0, 0]}
+                                label={({ value }) => `${value} kg`}
+                            />
+                            &lt;Bar
+                                dataKey="calories"
+                                fill="red"
+                                name="Calories brûlées (kCal)"
+                                radius={[10, 10, 0, 0]}
+                                label={({ value }) => `${value} kcal`}
+                            />
+                            &lt;ReferenceLine y={200} stroke="grey" strokeDasharray="3 3" />
+                            &lt;ReferenceLine y={400} stroke="grey" strokeDasharray="3 3" />
+                        &lt;/BarChart>
+                    &lt;/ResponsiveContainer>
+                &lt;/div>
+            )}
+        &lt;/>
+    );
+}
+
+export default Weight;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="UserActivity.html">UserActivity</a></li><li><a href="UserAverageSessions.html">UserAverageSessions</a></li><li><a href="UserData.html">UserData</a></li><li><a href="UserPerformance.html">UserPerformance</a></li></ul><h3>Global</h3><ul><li><a href="global.html#Goals">Goals</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Kpi">Kpi</a></li><li><a href="global.html#RadarComponent">RadarComponent</a></li><li><a href="global.html#SideBar">SideBar</a></li><li><a href="global.html#ValueItem">ValueItem</a></li><li><a href="global.html#Weight">Weight</a></li><li><a href="global.html#fetchUserActivity">fetchUserActivity</a></li><li><a href="global.html#fetchUserAverageSessions">fetchUserAverageSessions</a></li><li><a href="global.html#fetchUserData">fetchUserData</a></li><li><a href="global.html#fetchUserPerformance">fetchUserPerformance</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Thu Jun 06 2024 16:51:06 GMT+0200 (heure d’été d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
