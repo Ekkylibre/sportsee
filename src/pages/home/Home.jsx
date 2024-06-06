@@ -4,7 +4,6 @@ import "./home.css";
 import { Link } from "react-router-dom";
 
 function Home() {
-
     return (
         <>
             <NavBar />

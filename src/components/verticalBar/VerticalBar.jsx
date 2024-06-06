@@ -1,4 +1,4 @@
-import "./verticalbar.css"
+import "./verticalbar.css";
 
 /**
  * Composant pour afficher une barre latérale avec des icônes d'activités.
@@ -7,28 +7,9 @@ import "./verticalbar.css"
  * @returns {JSX.Element} Le composant SideBar.
  */
 function SideBar() {
-  /**
-   * URL de l'icône de yoga.
-   * @type {string}
-   */
   const yogaIcon = "/yoga.png";
-
-  /**
-   * URL de l'icône de natation.
-   * @type {string}
-   */
   const swimIcon = "/swim.png";
-
-  /**
-   * URL de l'icône de vélo.
-   * @type {string}
-   */
   const bikeIcon = "/bike.png";
-
-  /**
-   * URL de l'icône de fitness.
-   * @type {string}
-   */
   const fitnessIcon = "/fitness.png";
 
   return (

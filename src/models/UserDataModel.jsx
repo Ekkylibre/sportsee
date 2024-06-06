@@ -1,73 +1,44 @@
 /**
- * Modèle de données utilisateur.
+ * Modèle de base des données utilisateur.
  */
-class UserDataModel {
-    /**
-     * Crée une instance de UserDataModel.
-     * 
-     * @param {Object} userData - Les données de base de l'utilisateur.
-     * @param {Object} userActivity - L'activité de l'utilisateur.
-     * @param {Object} userAverageSessions - Les sessions moyennes de l'utilisateur.
-     * @param {Object} userPerformance - Les performances de l'utilisateur.
-     */
-    constructor(userData, userActivity, userAverageSessions, userPerformance) {
-        /**
-         * L'identifiant de l'utilisateur.
-         * @type {number}
-         */
-        this.id = userData.id;
-
-        /**
-         * Le prénom de l'utilisateur.
-         * @type {string}
-         */
+class UserData {
+    constructor(userData) {
         this.firstName = userData.userInfos.firstName;
-
-        /**
-         * Le nom de famille de l'utilisateur.
-         * @type {string}
-         */
         this.lastName = userData.userInfos.lastName;
-
-        /**
-         * L'âge de l'utilisateur.
-         * @type {number}
-         */
         this.age = userData.userInfos.age;
-
-        /**
-         * Le score actuel de l'utilisateur.
-         * @type {number}
-         */
-        this.score = userData.todayScore ?? userData.score; // Normalisation du score
-
-        /**
-         * Les données clés de l'utilisateur.
-         * @type {Object}
-         */
+        this.score = userData.todayScore ?? userData.score;
         this.keyData = userData.keyData;
+    }
+}
 
-        /**
-         * Les sessions d'activité de l'utilisateur.
-         * @type {Array}
-         */
-        this.activity = userActivity.sessions;
+/**
+ * Modèle de l'activité de l'utilisateur.
+ */
+class UserActivity {
+    constructor(userActivity) {
+        this.sessions = userActivity.sessions;
+    }
+}
 
-        /**
-         * Les sessions moyennes de l'utilisateur.
-         * @type {Array}
-         */
-        this.averageSessions = userAverageSessions.sessions;
+/**
+ * Modèle des sessions moyennes de l'utilisateur.
+ */
+class UserAverageSessions {
+    constructor(userAverageSessions) {
+        this.sessions = userAverageSessions.sessions;
+    }
+}
 
-        /**
-         * Les performances de l'utilisateur, avec le type de performance normalisé.
-         * @type {Array}
-         */
-        this.performance = userPerformance.data.map(item => ({
+/**
+ * Modèle des performances de l'utilisateur.
+ */
+class UserPerformance {
+    constructor(userPerformance) {
+        this.data = userPerformance.data.map(item => ({
             ...item,
             kind: userPerformance.kind[item.kind]
         }));
     }
 }
 
-export default UserDataModel;
+export { UserData, UserActivity, UserAverageSessions, UserPerformance };

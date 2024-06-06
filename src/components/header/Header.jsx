@@ -4,6 +4,14 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3000';
 
+/**
+ * Composant Header qui affiche un message de bienvenue à l'utilisateur.
+ * 
+ * @component
+ * @param {Object} props - Les propriétés passées au composant.
+ * @param {string} props.userId - L'identifiant de l'utilisateur.
+ * @returns {JSX.Element} Un élément JSX représentant l'en-tête.
+ */
 function Header({ userId }) {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);

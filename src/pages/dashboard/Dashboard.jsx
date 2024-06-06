@@ -12,7 +12,6 @@ import Header from "../../components/header/Header";
 import { fetchUserData } from '../../services/userService';
 
 function Dashboard() {
-
   const { userId } = useParams();
   const [user, setUser] = useState(null);
 
