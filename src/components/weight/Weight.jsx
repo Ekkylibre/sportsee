@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, ReferenceLine } from 'recharts';
-import { fetchUserData } from '../../services/userService';
+import { fetchUserActivity } from '../../services/userService';
 import "./weight.css";
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
@@ -13,14 +13,14 @@ import ErrorMessage from '../errorMessage/ErrorMessage';
  * @returns {JSX.Element} Le composant Weight.
  */
 function Weight({ userId }) {
-    const [userData, setUserData] = useState(null);
+    const [activityData, setActivityData] = useState([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await fetchUserData(userId);
-                setUserData(data);
+                const userActivity = await fetchUserActivity(userId);
+                setActivityData(userActivity.sessions);
             } catch (err) {
                 setError(err.message);
             }
@@ -63,12 +63,12 @@ function Weight({ userId }) {
     return (
         <>
             {error && <ErrorMessage message={error} />}
-            {!error && userData && (
+            {!error && activityData.length > 0 && (
                 <div className='weight-container'>
                     <div className='weight-title'>Activité quotidienne</div>
                     <ResponsiveContainer width="100%" height={300}>
                         <BarChart
-                            data={userData.activity}
+                            data={activityData}
                             margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                             barSize={10}
                             barGap={10}

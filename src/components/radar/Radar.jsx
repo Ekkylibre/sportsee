@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer, Tooltip } from 'recharts';
-import { fetchUserData } from '../../services/userService';
+import { fetchUserPerformance } from '../../services/userService';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 
 /**
@@ -32,8 +32,8 @@ function RadarComponent({ userId }) {
          */
         const fetchData = async () => {
             try {
-                const userData = await fetchUserData(userId);
-                setPerformanceData(userData.performance);
+                const userPerformance = await fetchUserPerformance(userId);
+                setPerformanceData(userPerformance.data);
             } catch (err) {
                 setError(err.message);
             }

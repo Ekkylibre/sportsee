@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
-import { fetchUserData } from '../../services/userService';
+import { fetchUserAverageSessions } from '../../services/userService';
 import ErrorMessage from '../errorMessage/ErrorMessage.jsx';
 import "./goals.css"
 
@@ -14,10 +14,10 @@ import "./goals.css"
  */
 function Goals({ userId }) {
     /**
-     * Les données de l'utilisateur.
+     * Les données des sessions moyennes de l'utilisateur.
      * @type {Object|null}
      */
-    const [userData, setUserData] = useState(null);
+    const [averageSessions, setAverageSessions] = useState(null);
     
     /**
      * Message d'erreur en cas de problème.
@@ -27,14 +27,14 @@ function Goals({ userId }) {
 
     useEffect(() => {
         /**
-         * Fonction pour récupérer les données de l'utilisateur.
+         * Fonction pour récupérer les sessions moyennes de l'utilisateur.
          * @async
          * @returns {Promise<void>}
          */
         const fetchData = async () => {
             try {
-                const data = await fetchUserData(userId);
-                setUserData(data);
+                const data = await fetchUserAverageSessions(userId);
+                setAverageSessions(data.sessions);
             } catch (err) {
                 setError(err.message);
             }
@@ -83,7 +83,6 @@ function Goals({ userId }) {
         );
     };
 
-    const { averageSessions } = userData || {};
     const sessionsWithFictives = [
         { day: 0, sessionLength: null },
         ...(averageSessions || []),
@@ -103,7 +102,7 @@ function Goals({ userId }) {
     return (
         <>
             {error && <ErrorMessage message={error} />}
-            {!error && userData && (
+            {!error && averageSessions && (
                 <div className='goals'>
                     <div className="duration-title">Durée moyenne des sessions</div>
                     <div className="responsive-chart-container">
